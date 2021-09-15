@@ -10,12 +10,12 @@ namespace IPS.Extensions
         public static void AddDataDependencies(this IServiceCollection services)
         {
             services.AddScoped<IFileUpdater, JsonFileUpdater>();
-            services.AddScoped<ISomeEntityRepository, SomeJsonRepository>();
+            services.AddScoped<IPaymentsRepository, JsonPaymentsRepository>();
         }
 
         public static void AddLogicDependencies(this IServiceCollection services)
         {
-            services.AddScoped<SomeService>();
+            services.AddScoped<ModeratorPaymentService>();
         }
 
         public static void AddPresentationDependencies(this IServiceCollection services)

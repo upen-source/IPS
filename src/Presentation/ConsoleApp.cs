@@ -10,9 +10,9 @@ namespace Presentation
 {
     public class ConsoleApp : IHostedService
     {
-        private readonly SomeService _service;
+        private readonly ModeratorPaymentService _service;
 
-        public ConsoleApp(SomeService service)
+        public ConsoleApp(ModeratorPaymentService service)
         {
             _service = service;
         }
@@ -20,8 +20,18 @@ namespace Presentation
         public async Task StartAsync(CancellationToken cancellationToken)
         {
             Console.WriteLine("Hello world");
-            await _service.Save(new SomeEntity("SomeId", "Some Name"), cancellationToken);
-            (await _service.GetAll(cancellationToken)).ToList().ForEach(Console.WriteLine);
+            var patient = new Patient("123", 100);
+            ModeratorFeePayment payment = new ContributoryPayment
+            {
+                Id = "123",
+                ServicePrice = 10,
+                Patient = patient,
+                Date = DateTime.Now
+            };
+            Console.WriteLine(payment.ComputeFee());
+            Console.WriteLine(payment.ComputePayment());
+            (await _service.GetAll(cancellationToken)).ToList()
+                .ForEach(Console.WriteLine);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

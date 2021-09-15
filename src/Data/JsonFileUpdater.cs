@@ -10,11 +10,11 @@ namespace Data
 {
     public class JsonFileUpdater : IFileUpdater
     {
-        public async Task UpdateFileWith<TEntity>(UpdateContent<TEntity> updateContent,
+        public async Task UpdateFileWith<TEntity>(UpdateContent<TEntity> updatedContent,
             Action<List<TEntity>> updateMethod,
             CancellationToken cancellation)
         {
-            (string fileName, IEnumerable<TEntity> entities) = updateContent;
+            (string fileName, IEnumerable<TEntity> entities) = updatedContent;
 
             List<TEntity> convertedEntities = entities.ToList();
             updateMethod(convertedEntities);

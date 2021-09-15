@@ -9,7 +9,7 @@ namespace Data
 
     public interface IFileUpdater
     {
-        public Task UpdateFileWith<TEntity>(UpdateContent<TEntity> updateContent,
+        public Task UpdateFileWith<TEntity>(UpdateContent<TEntity> updatedContent,
             Action<List<TEntity>> updateMethod,
             CancellationToken cancellation);
     }

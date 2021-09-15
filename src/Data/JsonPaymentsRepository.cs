@@ -9,38 +9,38 @@ using Microsoft.Extensions.Configuration;
 
 namespace Data
 {
-    public class SomeJsonRepository : ISomeEntityRepository
+    public class JsonPaymentsRepository : IPaymentsRepository
     {
         private readonly string       _filePath;
         private readonly IFileUpdater _fileUpdater;
 
-        public SomeJsonRepository(IConfiguration configuration, IFileUpdater fileUpdater)
+        public JsonPaymentsRepository(IConfiguration configuration, IFileUpdater fileUpdater)
         {
             _fileUpdater = fileUpdater;
             _filePath    = configuration["Persistence:FilePath"];
         }
 
-        public async Task Save(SomeEntity entity,
+        public async Task Save(ModeratorFeePayment entity,
             CancellationToken cancellation)
         {
-            IEnumerable<SomeEntity> entities = await GetAll(cancellation);
-            var updateContent = new UpdateContent<SomeEntity>(_filePath, entities);
-            await _fileUpdater.UpdateFileWith(updateContent, e => e.Add(entity),
+            IEnumerable<ModeratorFeePayment> entities = await GetAll(cancellation);
+            var updatedContent = new UpdateContent<ModeratorFeePayment>(_filePath, entities);
+            await _fileUpdater.UpdateFileWith(updatedContent, e => e.Add(entity),
                 cancellation);
         }
 
-        public async Task<IEnumerable<SomeEntity>> GetAll(CancellationToken cancellation)
+        public async Task<IEnumerable<ModeratorFeePayment>> GetAll(CancellationToken cancellation)
         {
-            if (!File.Exists(_filePath)) return new List<SomeEntity>();
+            if (!File.Exists(_filePath)) return new List<ModeratorFeePayment>();
 
             using StreamReader fileReader = File.OpenText(_filePath);
             string             content    = await fileReader.ReadToEndAsync();
             return (string.IsNullOrEmpty(content)
-                ? new List<SomeEntity>()
-                : JsonSerializer.Deserialize<List<SomeEntity>>(content))!;
+                ? new List<ModeratorFeePayment>()
+                : JsonSerializer.Deserialize<List<ModeratorFeePayment>>(content))!;
         }
 
-        public async Task<SomeEntity?> GetById(string id, CancellationToken cancellation)
+        public async Task<ModeratorFeePayment?> GetById(string id, CancellationToken cancellation)
         {
             return (await GetAll(cancellation)).FirstOrDefault(e => e.Id == id);
         }
@@ -50,8 +50,7 @@ namespace Data
             throw new System.NotImplementedException();
         }
 
-        public Task UpdateById(string id, SomeEntity newData,
-            CancellationToken cancellation)
+        public Task UpdateServicePrice(string id, double newServicePrice)
         {
             throw new System.NotImplementedException();
         }
