@@ -1,15 +1,19 @@
 ﻿using System;
+using Newtonsoft.Json;
 
 namespace Entities
 {
     public abstract class ModeratorFeePayment
     {
-        public string   Id              { get; init; }
-        public DateTime Date            { get; init; }
-        public double   ServicePrice    { get; init; }
-        public Patient  Patient         { get; init; }
-        public bool     WasMaxApplied   { get; private set; }
-        public double   OriginalPayment { get; protected set; }
+        public string   Id           { get; init; }
+        public DateTime Date         { get; init; }
+        public double   ServicePrice { get; init; }
+        public Patient  Patient      { get; init; }
+
+        public bool WasMaxApplied { get; private set; }
+
+        [JsonIgnore]
+        public double OriginalPayment { get; private set; }
 
         protected ModeratorFeePayment(string id, DateTime date, double servicePrice,
             Patient patient)
