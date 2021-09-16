@@ -23,14 +23,14 @@ namespace Presentation
             var patient = new Patient("123", 100);
             ModeratorFeePayment payment = new ContributoryPayment
             {
-                Id           = "123",
+                Id           = "3210",
                 ServicePrice = 10,
                 Patient      = patient,
                 Date         = DateTime.Now
             };
             await _service.Save(payment, cancellationToken);
-            /*(await _service.GetAll(cancellationToken)).ToList()
-                .ForEach(Console.WriteLine);*/
+            (await _service.GetAll(cancellationToken)).ToList()
+                .ForEach(Console.WriteLine);
         }
 
         public Task StopAsync(CancellationToken cancellationToken)

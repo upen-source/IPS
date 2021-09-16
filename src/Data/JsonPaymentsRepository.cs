@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 using Entities;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
-using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Data
 {

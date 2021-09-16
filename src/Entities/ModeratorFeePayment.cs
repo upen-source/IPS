@@ -44,5 +44,10 @@ namespace Entities
         }
 
         public double ComputePayment() => ApplyMaximum(ServicePrice * ComputeFee());
+
+        public override string ToString()
+        {
+            return $"{Id}, {Date}, {ServicePrice}, {Patient.ToString()}";
+        }
     }
 }

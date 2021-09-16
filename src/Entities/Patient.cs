@@ -24,5 +24,10 @@ namespace Entities
             Id       = id;
             Earnings = earnings;
         }
+
+        public override string ToString()
+        {
+            return $"Patient: {Id}, {Earnings}";
+        }
     }
 }
