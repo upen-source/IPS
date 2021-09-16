@@ -16,7 +16,7 @@
         public PatientCategory Category => Earnings switch
         {
             < 2 * MinimumEarning => PatientCategory.First,
-            < 5 * MinimumEarning => PatientCategory.Second,
+            <= 5 * MinimumEarning => PatientCategory.Second,
             _ => PatientCategory.Third
         };
     }
