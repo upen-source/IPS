@@ -27,7 +27,7 @@ namespace Entities
 
         public override string ToString()
         {
-            return $"Patient: {Id}, {Earnings}";
+            return $"{{ Id: {Id}, Ganancias: {Earnings} }}";
         }
     }
 }

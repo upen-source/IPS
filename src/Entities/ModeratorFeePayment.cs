@@ -47,7 +47,7 @@ namespace Entities
 
         public override string ToString()
         {
-            return $"{Id}, {Date}, {ServicePrice}, {Patient.ToString()}";
+            return $"{{ Id: {Id}, Fecha: {Date}, Precio: {ServicePrice}, Paciente: {Patient} }}";
         }
     }
 }

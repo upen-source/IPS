@@ -28,7 +28,7 @@ namespace Presentation
                 Patient      = patient,
                 Date         = DateTime.Now
             };
-            await _service.Save(payment, cancellationToken);
+            // await _service.Save(payment, cancellationToken);
             (await _service.GetAll(cancellationToken)).ToList()
                 .ForEach(Console.WriteLine);
         }

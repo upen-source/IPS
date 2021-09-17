@@ -4,6 +4,10 @@ namespace Entities
 {
     public class ContributoryPayment : ModeratorFeePayment
     {
+        private readonly int[]    _maximumPayments = { 250_000, 900_000, 1_500_000 };
+        private readonly double[] _feeDiscounts    = { 0.15, 0.2, 0.25 };
+
+
         public ContributoryPayment(string id, DateTime date, double servicePrice,
             Patient patient) : base(id, date, servicePrice, patient)
         {
@@ -13,18 +17,11 @@ namespace Entities
         {
         }
 
-        public override double ComputeFee()
-        {
-            double[] feeDiscounts = { 0.15, 0.2, 0.25 };
-            return Patient.Earnings * feeDiscounts[(int)Patient.Category];
-        }
+        public override double ComputeFee() =>
+            Patient.Earnings * _feeDiscounts[(int)Patient.Category];
 
         public override string GetMembership() => "contributivo";
 
-        protected override double GetMaximum()
-        {
-            int[] maximumPayments = { 250_000, 900_000, 1_500_000 };
-            return maximumPayments[(int)Patient.Category];
-        }
+        protected override double GetMaximum() => _maximumPayments[(int)Patient.Category];
     }
 }
